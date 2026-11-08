@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Petit à petit — Belajar Bahasa Prancis 🇫🇷</title>
+<style>
+:root{--bleu:#1e3a8a;--bleu2:#3b5bdb;--rouge:#e11d48;--rose:#fde2ea;--ciel:#e7efff;--ok:#16a34a;--ko:#dc2626;--txt:#1f2937;--mut:#6b7280;--card:#fff;--bg:#f6f4fb}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);font-size:17px;-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:10px 16px;background:var(--ciel);color:var(--bleu);font-weight:600;transition:transform .08s}
+button:active{transform:scale(.96)}
+button.pri{background:var(--bleu2);color:#fff}
+button.red{background:var(--rouge);color:#fff}
+button.ghost{background:transparent;color:var(--bleu2)}
+button.sm{padding:6px 10px;font-size:15px;border-radius:10px}
+button:disabled{opacity:.45}
+#top{position:sticky;top:0;z-index:10;background:linear-gradient(90deg,var(--bleu) 0 33%,#fff 33% 34%,var(--bleu) 34%);background:var(--bleu);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px #0002}
+#top .logo{font-weight:800;font-size:19px;cursor:pointer}
+#top .logo span{color:#ffb4c3}
+#top .sp{flex:1}
+#top .xp{background:#ffffff22;border-radius:20px;padding:4px 10px;font-size:14px;white-space:nowrap}
+#top button{background:#ffffff22;color:#fff;padding:6px 10px;font-size:14px}
+#top button.on{background:#ffb4c3;color:var(--bleu)}
+#app{max-width:820px;margin:0 auto;padding:16px 14px 80px}
+.card{background:var(--card);border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 2px 10px #1e3a8a12}
+h1{font-size:26px;margin:6px 0 4px}h2{font-size:21px;margin:4px 0 10px}h3{margin:6px 0}
+.mut{color:var(--mut);font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.lesson{cursor:pointer;position:relative;overflow:hidden}
+.lesson .big{font-size:42px}
+.lesson .n{position:absolute;right:14px;top:10px;font-size:13px;color:var(--mut)}
+.bar{height:10px;background:#e5e7eb;border-radius:9px;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--bleu2),var(--rouge));border-radius:9px;transition:width .3s}
+.tabs{display:flex;gap:8px;margin:12px 0}
+.tabs button{flex:1;padding:12px}
+.tabs button.on{background:var(--bleu2);color:#fff}
+.intro{background:var(--ciel);border-radius:14px;padding:12px 14px;margin:8px 0 12px;line-height:1.45}
+.prof{background:#fff7e6;border-left:5px solid #f59e0b;border-radius:10px;padding:10px 14px;margin:8px 0 12px;line-height:1.45;font-size:15.5px}
+.prof b{color:#b45309}
+.item{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid #eee}
+.item:last-child{border-bottom:0}
+.item .t{flex:1;min-width:0}
+.fr{font-size:20px;font-weight:700;color:var(--bleu)}
+.pr{font-size:14px;color:var(--rouge);font-family:ui-monospace,Menlo,monospace}
+.id{font-size:15.5px;color:var(--mut)}
+.item .res{font-size:13px}
+.ex{display:flex;align-items:center;gap:12px;cursor:pointer}
+.ex .em{font-size:34px}
+.ex .t{flex:1}
+.ex .chk{font-size:24px}
+.center{text-align:center}
+.huge{font-size:34px;font-weight:800;color:var(--bleu);margin:8px 0;word-wrap:break-word}
+.choices{display:grid;gap:10px;margin-top:14px}
+.choices button{background:#fff;border:2px solid #dbe3ff;color:var(--txt);text-align:left;padding:14px;font-weight:500}
+.choices button.good{background:#dcfce7;border-color:var(--ok)}
+.choices button.bad{background:#fee2e2;border-color:var(--ko)}
+.mic{width:96px;height:96px;border-radius:50%;font-size:42px;background:var(--rouge);color:#fff;box-shadow:0 6px 18px #e11d4855;margin:12px auto;display:block}
+.mic.rec{animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #e11d4877}100%{box-shadow:0 0 0 22px #e11d4800}}
+.score{font-size:46px;font-weight:800}
+.stars{font-size:34px;letter-spacing:4px}
+.w-ok{color:var(--ok);font-weight:700}.w-ko{color:var(--ko);font-weight:700;text-decoration:underline wavy}
+.tip{background:#fdf2f8;border-radius:12px;padding:10px 12px;margin-top:8px;font-size:15px;text-align:left}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:54px;padding:8px;border-radius:14px}
+.chips.ans{background:var(--ciel);border:2px dashed #a5b4fc}
+.chips button{background:#fff;border:2px solid #c7d2fe;color:var(--txt);font-weight:600}
+.mem{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(min-width:600px){.mem{grid-template-columns:repeat(4,1fr)}}
+.mem button{height:92px;background:var(--bleu2);color:#fff;font-size:15px;padding:6px;word-break:break-word}
+.mem button.open{background:#fff;color:var(--txt);border:2px solid #c7d2fe}
+.mem button.done{background:#dcfce7;color:var(--ok);border:2px solid var(--ok)}
+input.txt{width:100%;font:inherit;font-size:20px;padding:12px;border-radius:12px;border:2px solid #c7d2fe;margin-top:10px}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.flash{min-height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;background:linear-gradient(135deg,#fff,var(--rose))}
+.timer{font-size:28px;font-weight:800;color:var(--rouge)}
+.bubble{border-radius:16px;padding:10px 14px;margin:8px 0;max-width:88%}
+.bubble.a{background:#eef2ff}
+.bubble.b{background:var(--rose);margin-left:auto}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:12px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:99;max-width:90%;text-align:center}
+#toast.show{opacity:1}
+.confetti{position:fixed;top:-40px;font-size:28px;z-index:98;animation:fall 2.2s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.modal{position:fixed;inset:0;background:#0007;display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.modal .card{max-width:520px;width:100%;max-height:90vh;overflow:auto}
+.warn{background:#fee2e2;color:#991b1b;border-radius:12px;padding:10px 14px;margin:10px 0;font-size:15px}
+table.pron{border-collapse:collapse;width:100%;font-size:15px}table.pron td{padding:5px;border-bottom:1px solid #eee}
+</style>
+</head>
+<body>
+<div id="top"></div>
+<div id="app"></div>
+<div id="toast"></div>
+<script>
+/* =====================================================================
+   PETIT À PETIT — 4 pelajaran bahasa Prancis untuk pemula (penutur Indonesia)
+   Données : [français, indonésien, prononciation simplifiée]
+   ===================================================================== */
+const LESSONS = [
+/* ------------------------------ COURS 1 ------------------------------ */
+{ emoji:"👋", fr:"Bonjour !", title:"Bunyi & memperkenalkan diri",
+  goal:"Mengenal bunyi bahasa Prancis, menyapa, dan memperkenalkan diri.",
+  plan:[
+    "5 min — Accueil : le français ne se lit pas comme l'indonésien (lettres muettes, sons nouveaux). Expliquer le code de prononciation (bouton ❓ en haut).",
+    "15 min — Les sons : insister sur U/OU, les nasales (on, an, in), le R. Faire répéter chaque mot 3 fois en exagérant.",
+    "10 min — Lettres muettes et combinaisons (eau, ai, oi, ou, gn, ill). Lui faire deviner la prononciation avant de la dire.",
+    "15 min — Salutations + se présenter : jeu de rôle (vous = une ado française au lycée), puis inverser les rôles.",
+    "5 min — Tu ou vous ? La bise.",
+    "10 min — Nombres 0–20 : compter ensemble, puis dans le désordre, elle montre avec les doigts."],
+  sections:[
+  { t:"Les sons du français", ti:"Bunyi-bunyi bahasa Prancis",
+    intro:"Huruf bahasa Prancis sama dengan bahasa Indonesia, tapi cara bacanya sering berbeda. Dengarkan 🔊, lalu ulangi. Petunjuk cara baca (merah): <b>ü</b> = bilang 'i' sambil bibir bulat seperti bersiul · <b>ö</b> = bilang 'e' sambil bibir bulat · <b>ë</b> = e seperti di 'senang' · <b>~</b> = bunyi lewat hidung (jangan ucapkan n-nya!) · <b>R</b> = r dari tenggorokan · <b>zh</b> = j lembut · <b>sy</b> = ch.",
+    prof:"Point n°1 : <b>U (tu) ≠ OU (tout)</b>. Le son [y] n'existe pas en indonésien : faire dire « i » puis arrondir les lèvres sans bouger la langue. <b>Nasales</b> (on, an, in) : la bouche ne se ferme pas, pas de « n » ni de « ng » à la fin. <b>R</b> : se gargariser doucement, au fond de la gorge (pas le r roulé indonésien). <b>E</b> muet de « le » = le « e pepet » indonésien (senang) : elle le connaît déjà !",
+    items:[
+      ["papa","ayah (papa) — bunyi A","pa-pa"],
+      ["café","kopi — bunyi É","ka-fé"],
+      ["mère","ibu — bunyi È (mulut lebih terbuka)","mèR"],
+      ["le","(kata sandang) — bunyi Ë, seperti 'senang'","lë"],
+      ["vous","kamu/Anda — OU dibaca u","vu"],
+      ["tu","kamu — U dibaca ü (bibir bulat + 'i')","tü"],
+      ["tu, tout","kamu, semua — ü ≠ u !","tü, tu"],
+      ["deux","dua — EU dibaca ö","dö"],
+      ["bon","baik / enak — bunyi ON","bon~"],
+      ["enfant","anak — bunyi AN / EN","an~-fan~"],
+      ["pain","roti — bunyi AIN / IN","pin~"],
+      ["rouge","merah — bunyi R","Ruzh"],
+      ["chat","kucing — CH dibaca sy","sya"],
+      ["je","saya — J dibaca zh","zhë"],
+      ["hôtel","hotel — H tidak pernah dibaca","o-tèl"]]},
+  { t:"Lettres muettes", ti:"Huruf yang tidak dibaca",
+    intro:"Di bahasa Indonesia semua huruf dibaca. Di bahasa Prancis, huruf terakhir sering <b>tidak dibaca</b> (Paris = pa-Ri). Gabungan huruf punya bunyi sendiri: <b>eau / au</b> = o · <b>ai</b> = è · <b>oi</b> = wa · <b>ou</b> = u · <b>gn</b> = ny · <b>ill</b> = y.",
+    prof:"Règle simple : la consonne finale est souvent muette, sauf souvent <b>C, R, F, L</b> (penser au mot anglais « CaReFuL »). Écrire des mots sur un papier et lui faire deviner la prononciation avant de la donner.",
+    items:[
+      ["Paris","Paris (kota)","pa-Ri"],
+      ["petit","kecil","pë-ti"],
+      ["beaucoup","banyak","bo-ku"],
+      ["eau","air","o"],
+      ["lait","susu","lè"],
+      ["moi","aku / saya","mwa"],
+      ["oui","ya","wi"],
+      ["nous","kami / kita","nu"],
+      ["montagne","gunung — GN = ny","mon~-tany"],
+      ["fille","anak perempuan — ILL = y","fiy"]]},
+  { t:"Saluer", ti:"Menyapa",
+    intro:"Di Prancis, kita <b>selalu</b> bilang « Bonjour » saat masuk toko, naik bus, atau bertemu orang. Tidak bilang bonjour dianggap tidak sopan! « Salut » hanya untuk teman.",
+    prof:"Insister : « Bonjour » en entrant dans un magasin, chez le médecin, dans le bus — c'est une vraie règle sociale. « Salut » seulement entre jeunes/amis. « Bonsoir » à partir de 18h environ.",
+    items:[
+      ["Bonjour !","Halo / selamat pagi / selamat siang","bon~-zhuR"],
+      ["Bonsoir !","Selamat malam (saat bertemu)","bon~-swaR"],
+      ["Salut !","Hai! (ke teman)","sa-lü"],
+      ["Au revoir !","Sampai jumpa / selamat tinggal","o-Rë-vwaR"],
+      ["À bientôt !","Sampai ketemu lagi!","a byin~-to"],
+      ["Bonne nuit !","Selamat tidur","bon nüi"],
+      ["Merci !","Terima kasih","mèR-si"],
+      ["Merci beaucoup !","Terima kasih banyak","mèR-si bo-ku"],
+      ["De rien.","Sama-sama","dë Ryin~"],
+      ["S'il te plaît","Tolong / please (ke teman)","sil të plè"],
+      ["S'il vous plaît","Tolong / please (sopan)","sil vu plè"],
+      ["Pardon !","Maaf!","paR-don~"],
+      ["Excusez-moi.","Permisi / maaf (sopan)","èks-kü-zé mwa"],
+      ["Oui","Ya","wi"],
+      ["Non","Tidak","non~"]]},
+  { t:"Se présenter", ti:"Memperkenalkan diri",
+    intro:"Kalimat untuk memperkenalkan diri. Untuk perempuan, kata sifat sering ditambah <b>-e</b>: indonésien → indonésienne, enchanté → enchantée.",
+    prof:"Jeu de rôle : vous êtes une ado française qui la rencontre au lycée. Puis inverser les rôles. Évoquer masculin/féminin (indonésien/indonésienne) sans détailler : c'est le cours 2. Liaison : dix-sept‿ans = di-sè-tan~.",
+    items:[
+      ["Je m'appelle {nom}.","Nama saya {nom}.","zhë ma-pèl {nom}"],
+      ["Comment tu t'appelles ?","Siapa namamu?","ko-man~ tü ta-pèl"],
+      ["J'ai dix-sept ans.","Umur saya 17 tahun.","zhé di-sè-tan~"],
+      ["Je suis indonésienne.","Saya orang Indonesia (perempuan).","zhë süi-zin~-do-né-zyèn"],
+      ["Je viens d'Indonésie.","Saya berasal dari Indonesia.","zhë vyin~ din~-do-né-zi"],
+      ["J'habite en France.","Saya tinggal di Prancis.","zha-bi-tan~ fRan~s"],
+      ["Enchantée !","Senang berkenalan! (perempuan)","an~-syan~-té"],
+      ["Ça va ?","Apa kabar? (santai)","sa va"],
+      ["Ça va bien, et toi ?","Baik, kalau kamu?","sa va byin~, é twa"],
+      ["Je ne parle pas bien français.","Bahasa Prancis saya belum bagus.","zhën paRl pa byin~ fRan~-sè"]]},
+  { t:"Tu ou vous ? La bise", ti:"Tu atau vous? Cium pipi",
+    intro:"<b>Tu</b> = untuk teman, keluarga, anak muda (seperti 'kamu'). <b>Vous</b> = untuk orang dewasa yang tidak dikenal, guru, penjual (seperti 'Anda / Bapak / Ibu'). <b>La bise</b> = cium pipi kiri-kanan: salam biasa di Prancis antara teman dan keluarga. Kalau tidak nyaman, cukup bilang « Bonjour » sambil tersenyum 🙂.",
+    prof:"Comparer avec kamu / Anda, Bapak, Ibu. Expliquer la bise (2 bises en général, ça dépend des régions !) et qu'elle a le droit de simplement dire bonjour. « Madame / Monsieur » s'emploie beaucoup plus qu'en indonésien.",
+    items:[
+      ["Bonjour madame !","Selamat pagi, Bu!","bon~-zhuR ma-dam"],
+      ["Bonjour monsieur !","Selamat pagi, Pak!","bon~-zhuR më-syö"],
+      ["Comment allez-vous ?","Apa kabar? (sopan)","ko-man~-ta-lé vu"],
+      ["Et vous ?","Kalau Anda?","é vu"],
+      ["On se fait la bise ?","Kita cium pipi? (salam Prancis)","on~ së fè la biz"]]},
+  { t:"Les nombres 0 à 20", ti:"Angka 0–20",
+    intro:"Angka 0 sampai 20. Ingat: huruf terakhir sering tidak dibaca (deux = dö, trois = tRwa).",
+    prof:"Compter ensemble, puis dire des nombres au hasard : elle montre avec les doigts / les écrit. Puis son âge, la date, un numéro de téléphone chiffre par chiffre.",
+    items:[
+      ["zéro","nol (0)","zé-Ro"],["un","satu (1)","in~"],["deux","dua (2)","dö"],["trois","tiga (3)","tRwa"],
+      ["quatre","empat (4)","katR"],["cinq","lima (5)","sin~k"],["six","enam (6)","sis"],["sept","tujuh (7)","sèt"],
+      ["huit","delapan (8)","üit"],["neuf","sembilan (9)","nöf"],["dix","sepuluh (10)","dis"],["onze","sebelas (11)","on~z"],
+      ["douze","dua belas (12)","duz"],["treize","tiga belas (13)","tRèz"],["quatorze","empat belas (14)","ka-toRz"],
+      ["quinze","lima belas (15)","kin~z"],["seize","enam belas (16)","sèz"],["dix-sept","tujuh belas (17)","di-sèt"],
+      ["dix-huit","delapan belas (18)","di-züit"],["dix-neuf","sembilan belas (19)","diz-nöf"],["vingt","dua puluh (20)","vin~"]]}],
+  dialog:[
+    ["a","Salut ! Comment tu t'appelles ?","Hai! Siapa namamu?"],
+    ["b","Je m'appelle {nom}.","Nama saya {nom}."],
+    ["a","Enchantée ! Tu as quel âge ?","Senang berkenalan! Umurmu berapa?"],
+    ["b","J'ai dix-sept ans.","Umur saya 17 tahun."],
+    ["a","Tu viens d'où ?","Kamu dari mana?"],
+    ["b","Je viens d'Indonésie.","Saya dari Indonesia."],
+    ["a","Ça va ?","Apa kabar?"],
+    ["b","Ça va bien, et toi ?","Baik, kalau kamu?"],
+    ["a","Très bien, merci ! Au revoir !","Baik sekali, terima kasih! Sampai jumpa!"],
+    ["b","Au revoir, à bientôt !","Sampai jumpa, sampai ketemu lagi!"]]},
+
+/* ------------------------------ COURS 2 ------------------------------ */
+{ emoji:"🏡", fr:"Ma famille", title:"Keluarga, rumah & warna",
+  goal:"Kata sandang (le/la), kata kerja être & avoir, keluarga, rumah, warna, angka 20–100.",
+  plan:[
+    "5 min — Révision du cours 1 : se présenter (elle fait sa présentation complète).",
+    "15 min — Masculin / féminin + articles : LA grande nouveauté. Toujours apprendre le mot AVEC son article.",
+    "15 min — Être et avoir : réciter en rythme comme une chanson. Comparer avec « punya ». Âge = avoir.",
+    "10 min — Famille + maison : arbre généalogique, tour de la maison de vacances en nommant les objets.",
+    "10 min — Couleurs, adjectifs, mon/ma/mes : montrer des objets autour de vous.",
+    "5 min — Nombres 20–100 : le rire de 80 = 4×20 et 99 = 4×20+19."],
+  sections:[
+  { t:"Masculin et féminin", ti:"Maskulin & feminin",
+    intro:"Di bahasa Prancis, <b>semua benda</b> punya jenis: maskulin atau feminin. Tidak ada logikanya — hafalkan bersama kata sandangnya! <b>un / le</b> = maskulin · <b>une / la</b> = feminin · <b>l'</b> = sebelum huruf vokal · <b>les / des</b> = jamak (banyak). Jamak biasanya + s, tapi s-nya tidak dibaca.",
+    prof:"C'est LA nouveauté pour une Indonésienne : pas d'articles ni de genre en indonésien. Règle d'or : apprendre chaque mot AVEC son article (une table, pas « table »). Le pluriel ne s'entend pas sur le nom : c'est l'article (le/les) qui s'entend. Liaison : les‿amis = lé-za-mi.",
+    items:[
+      ["un garçon","seorang anak laki-laki (maskulin)","in~ gaR-son~"],
+      ["une fille","seorang anak perempuan (feminin)","ün fiy"],
+      ["le livre","buku itu (maskulin)","lë livR"],
+      ["la table","meja itu (feminin)","la tabl"],
+      ["l'école","sekolah itu (l' sebelum vokal)","lé-kol"],
+      ["les amis","teman-teman itu (jamak)","lé-za-mi"],
+      ["des pommes","beberapa apel (jamak)","dé pom"]]},
+  { t:"Le verbe être", ti:"Kata kerja ÊTRE (adalah)",
+    intro:"« Être » = adalah / berada. Di bahasa Indonesia sering tidak dipakai (\"Saya senang\"), tapi di bahasa Prancis <b>wajib</b>: Je <b>suis</b> contente.",
+    prof:"En indonésien on dit « saya senang » sans verbe : en français il est obligatoire. Écrire le tableau de conjugaison et le réciter en rythme. Il est / elle est : liaison i-lè, è-lè.",
+    items:[
+      ["je suis","saya (adalah)","zhë süi"],
+      ["tu es","kamu (adalah)","tü è"],
+      ["il est / elle est","dia laki-laki / dia perempuan (adalah)","i-lè / è-lè"],
+      ["nous sommes","kami (adalah)","nu som"],
+      ["vous êtes","kalian / Anda (adalah)","vu-zèt"],
+      ["ils sont / elles sont","mereka (adalah)","il son~ / èl son~"],
+      ["Je suis contente.","Saya senang. (perempuan)","zhë süi kon~-tan~t"],
+      ["Elle est gentille.","Dia baik hati.","è-lè zhan~-tiy"]]},
+  { t:"Le verbe avoir", ti:"Kata kerja AVOIR (punya)",
+    intro:"« Avoir » = punya. Untuk umur, orang Prancis bilang <b>punya</b>: J'ai 17 ans = \"saya punya 17 tahun\"! Juga: j'ai faim (lapar), j'ai soif (haus).",
+    prof:"Faire le parallèle avec « punya ». Attention : <b>ils‿ont</b> (il-zon~ = mereka punya) ≠ <b>ils sont</b> (il son~ = mereka adalah) — bon exercice d'écoute, le dire plusieurs fois et elle montre lequel.",
+    items:[
+      ["j'ai","saya punya","zhé"],
+      ["tu as","kamu punya","tü a"],
+      ["il a / elle a","dia punya","i-la / è-la"],
+      ["nous avons","kami punya","nu-za-von~"],
+      ["vous avez","kalian / Anda punya","vu-za-vé"],
+      ["ils ont / elles ont","mereka punya","il-zon~ / èl-zon~"],
+      ["J'ai un frère.","Saya punya satu saudara laki-laki.","zhé in~ fRèR"],
+      ["Elle a dix-sept ans.","Umurnya 17 tahun.","è-la di-sè-tan~"]]},
+  { t:"La famille", ti:"Keluarga",
+    intro:"Anggota keluarga. « La belle-mère » bisa berarti ibu tiri atau ibu mertua, « la belle-fille » = anak tiri perempuan atau menantu.",
+    prof:"Faire son arbre généalogique au brouillon, en français : la famille en Indonésie + la nouvelle famille en France. Phrase utile : « Je suis la belle-fille de … ».",
+    items:[
+      ["la mère / maman","ibu / mama","la mèR / ma-man~"],
+      ["le père / papa","ayah / papa","lë pèR / pa-pa"],
+      ["le frère","saudara laki-laki","lë fRèR"],
+      ["la sœur","saudara perempuan","la söR"],
+      ["la belle-mère","ibu tiri / ibu mertua","la bèl-mèR"],
+      ["le beau-père","ayah tiri / ayah mertua","lë bo-pèR"],
+      ["la belle-fille","anak tiri perempuan / menantu","la bèl-fiy"],
+      ["les parents","orang tua","lé pa-Ran~"],
+      ["le grand-père","kakek","lë gRan~-pèR"],
+      ["la grand-mère","nenek","la gRan~-mèR"],
+      ["l'oncle / la tante","paman / bibi","lon~kl / la tan~t"],
+      ["le cousin / la cousine","sepupu (laki-laki / perempuan)","lë ku-zin~ / la ku-zin"],
+      ["le chien","anjing","lë syin~"],
+      ["le chat","kucing","lë sya"]]},
+  { t:"La maison", ti:"Rumah",
+    intro:"Benda-benda di rumah. Ingat kata sandangnya (le / la)!",
+    prof:"Faire le tour du logement de vacances en nommant les objets avec leur article. On peut coller des post-it.",
+    items:[
+      ["la maison","rumah","la mè-zon~"],
+      ["la chambre","kamar tidur","la syan~bR"],
+      ["la cuisine","dapur","la küi-zin"],
+      ["la salle de bain","kamar mandi","la sal dë bin~"],
+      ["les toilettes","toilet / WC","lé twa-lèt"],
+      ["le salon","ruang tamu","lë sa-lon~"],
+      ["le lit","tempat tidur","lë li"],
+      ["la porte","pintu","la poRt"],
+      ["la fenêtre","jendela","la fë-nètR"],
+      ["le téléphone","telepon / HP","lë té-lé-fon"],
+      ["la clé","kunci","la klé"],
+      ["le jardin","taman / kebun","lë zhaR-din~"]]},
+  { t:"Couleurs et adjectifs", ti:"Warna & kata sifat",
+    intro:"Kabar baik: seperti bahasa Indonesia, kata sifat biasanya di <b>belakang</b> kata benda (mobil merah = une voiture rouge)! Tapi untuk benda feminin, kata sifat ditambah -e: un chat noir / une voiture noire.",
+    prof:"Montrer des objets autour de vous : « De quelle couleur ? ». Féminin = + e, et souvent on entend alors la consonne finale (petit/petite, vert/verte). Exceptions fréquentes : beau/belle, blanc/blanche.",
+    items:[
+      ["rouge","merah","Ruzh"],
+      ["bleu / bleue","biru","blö"],
+      ["blanc / blanche","putih","blan~ / blan~sy"],
+      ["noir / noire","hitam","nwaR"],
+      ["vert / verte","hijau","vèR / vèRt"],
+      ["jaune","kuning","zhon"],
+      ["rose","merah muda / pink","Roz"],
+      ["grand / grande","besar / tinggi","gRan~ / gRan~d"],
+      ["petit / petite","kecil","pë-ti / pë-tit"],
+      ["beau / belle","tampan / cantik","bo / bèl"],
+      ["une voiture rouge","mobil merah","ün vwa-tüR Ruzh"],
+      ["un chat noir","kucing hitam","in~ sya nwaR"],
+      ["Ma chambre est petite.","Kamarku kecil.","ma syan~bR è pë-tit"]]},
+  { t:"Mon, ma, mes", ti:"-ku dan -mu",
+    intro:"<b>mon / ma / mes</b> = -ku · <b>ton / ta / tes</b> = -mu. Pilihnya tergantung benda (maskulin / feminin / jamak), bukan pemiliknya!",
+    prof:"Le possessif s'accorde avec l'objet, pas avec le propriétaire : un garçon dit « ma chambre », une fille dit « mon téléphone ». Souvent contre-intuitif.",
+    items:[
+      ["mon frère","saudara laki-lakiku","mon~ fRèR"],
+      ["ma sœur","saudara perempuanku","ma söR"],
+      ["mes parents","orang tuaku","mé pa-Ran~"],
+      ["ton téléphone","HP-mu","ton~ té-lé-fon"],
+      ["ta chambre","kamarmu","ta syan~bR"],
+      ["tes amis","teman-temanmu","té-za-mi"]]},
+  { t:"Les nombres 20 à 100", ti:"Angka 20–100",
+    intro:"Angka Prancis agak lucu: 70 = 60 + 10 (soixante-dix), 80 = 4 × 20 (quatre-vingts), 90 = 4 × 20 + 10 (quatre-vingt-dix)! 😄",
+    prof:"Jeu du prix : vous dites un prix (« trente-cinq euros »), elle l'écrit en chiffres. 99 = quatre-vingt-dix-neuf = 4×20+10+9.",
+    items:[
+      ["vingt","dua puluh (20)","vin~"],
+      ["vingt et un","dua puluh satu (21)","vin~-té-in~"],
+      ["vingt-deux","dua puluh dua (22)","vin~t-dö"],
+      ["trente","tiga puluh (30)","tRan~t"],
+      ["quarante","empat puluh (40)","ka-Ran~t"],
+      ["cinquante","lima puluh (50)","sin~-kan~t"],
+      ["soixante","enam puluh (60)","swa-san~t"],
+      ["soixante-dix","tujuh puluh (70 = 60+10)","swa-san~t-dis"],
+      ["quatre-vingts","delapan puluh (80 = 4×20)","ka-tRë-vin~"],
+      ["quatre-vingt-dix","sembilan puluh (90 = 4×20+10)","ka-tRë-vin~-dis"],
+      ["cent","seratus (100)","san~"]]}],
+  dialog:[
+    ["a","Ta famille est grande ?","Keluargamu besar?"],
+    ["b","Oui, nous sommes une grande famille.","Ya, kami keluarga besar."],
+    ["a","Tu as des frères et sœurs ?","Kamu punya saudara?"],
+    ["b","J'ai un frère et une sœur.","Saya punya satu saudara laki-laki dan satu saudara perempuan."],
+    ["a","Tu as un animal ?","Kamu punya hewan peliharaan?"],
+    ["b","Oui, j'ai un chat noir.","Ya, saya punya kucing hitam."],
+    ["a","Elle est comment, ta chambre ?","Kamarmu seperti apa?"],
+    ["b","Ma chambre est petite.","Kamarku kecil."],
+    ["a","Et ton téléphone, il est de quelle couleur ?","Dan HP-mu warnanya apa?"],
+    ["b","Mon téléphone est rose.","HP-ku warnanya pink."]]},
+
+/* ------------------------------ COURS 3 ------------------------------ */
+{ emoji:"☀️", fr:"Ma journée", title:"Kata kerja, hari & jam",
+  goal:"Kata kerja -er, kata kerja penting, bilang 'tidak', bertanya, hari, jam, dan kesukaan.",
+  plan:[
+    "5 min — Révision : être/avoir + présenter sa famille.",
+    "15 min — Verbes en -er : rassurer, à l'oral je/tu/il/ils = même son. Seuls nous (-ons) et vous (-ez) changent.",
+    "10 min — Verbes essentiels (vais, fais, veux, peux, prends, comprends, sais) : seulement la forme « je ».",
+    "10 min — Négation ne…pas + questions (intonation ↗ et « est-ce que »). Jeu de questions-réponses rapide.",
+    "10 min — Jours + heure : son programme de la semaine, horaires des repas en France.",
+    "10 min — J'aime / je n'aime pas : parler de ses passions (musique, séries, K-pop…)."],
+  sections:[
+  { t:"Les verbes en -er", ti:"Kata kerja berakhiran -ER",
+    intro:"Kata kerja Prancis <b>berubah sesuai subjek</b> (di bahasa Indonesia tidak!). Kabar baik: kebanyakan kata kerja berakhiran -er dan polanya sama. Dan: parle, parles, parlent → bunyinya <b>sama</b> (paRl)! -ent di akhir tidak dibaca.",
+    prof:"Grande différence avec l'indonésien : la conjugaison. Rassurer : pour les verbes en -er, à l'oral, je/tu/il/ils se prononcent pareil. Lui faire conjuguer d'autres verbes de la liste au même modèle (je mange, nous mangeons…).",
+    items:[
+      ["parler","berbicara","paR-lé"],
+      ["je parle","saya berbicara","zhë paRl"],
+      ["tu parles","kamu berbicara","tü paRl"],
+      ["il parle / elle parle","dia berbicara","il paRl / èl paRl"],
+      ["nous parlons","kami berbicara","nu paR-lon~"],
+      ["vous parlez","kalian / Anda berbicara","vu paR-lé"],
+      ["ils parlent","mereka berbicara","il paRl"],
+      ["manger","makan","man~-zhé"],
+      ["aimer","suka / cinta","é-mé"],
+      ["habiter","tinggal","a-bi-té"],
+      ["écouter","mendengarkan","é-ku-té"],
+      ["regarder","melihat / menonton","Rë-gaR-dé"],
+      ["travailler","bekerja","tRa-va-yé"],
+      ["étudier","belajar","é-tü-dyé"],
+      ["jouer","bermain","zhu-é"],
+      ["chanter","bernyanyi","syan~-té"],
+      ["danser","menari","dan~-sé"]]},
+  { t:"Les verbes essentiels", ti:"Kata kerja penting",
+    intro:"Kata kerja ini sangat penting tapi tidak beraturan. Hafalkan dulu bentuk « je » (saya).",
+    prof:"On se limite à la forme « je » + une phrase utile. Pas besoin de toute la conjugaison aujourd'hui.",
+    items:[
+      ["je vais","saya pergi","zhë vè"],
+      ["je fais","saya membuat / melakukan","zhë fè"],
+      ["je veux","saya mau","zhë vö"],
+      ["je peux","saya bisa / boleh","zhë pö"],
+      ["je prends","saya ambil / naik","zhë pRan~"],
+      ["je comprends","saya mengerti","zhë kon~-pRan~"],
+      ["je sais","saya tahu","zhë sè"],
+      ["Je vais à l'école.","Saya pergi ke sekolah.","zhë vè a lé-kol"],
+      ["Je veux dormir.","Saya mau tidur.","zhë vö doR-miR"],
+      ["Je peux venir ?","Boleh saya ikut?","zhë pö vë-niR"]]},
+  { t:"Dire non : ne … pas", ti:"Bilang TIDAK",
+    intro:"Untuk bilang tidak: <b>ne + kata kerja + pas</b>. Je comprends → Je <b>ne</b> comprends <b>pas</b>. Saat bicara cepat, orang Prancis sering menghilangkan « ne » (j'comprends pas).",
+    prof:"Structure « sandwich » ne…pas. Prévenir qu'à l'oral les jeunes disent « j'sais pas », « c'est pas grave » : elle l'entendra au lycée.",
+    items:[
+      ["Je ne comprends pas.","Saya tidak mengerti.","zhën kon~-pRan~ pa"],
+      ["Je ne sais pas.","Saya tidak tahu.","zhën sè pa"],
+      ["Je n'aime pas ça.","Saya tidak suka itu.","zhë nèm pa sa"],
+      ["Je ne veux pas.","Saya tidak mau.","zhën vö pa"],
+      ["Ce n'est pas grave.","Tidak apa-apa.","së nè pa gRav"]]},
+  { t:"Poser une question", ti:"Bertanya",
+    intro:"Kata tanya. Cara paling mudah bertanya: <b>naikkan nada</b> di akhir kalimat ↗ (Tu aimes le chocolat ?) atau tambahkan « Est-ce que » di depan.",
+    prof:"Trois façons de poser une question : enseigner l'intonation (la plus simple) et « est-ce que ». L'inversion (aimes-tu ?) peut attendre.",
+    items:[
+      ["Qui ?","Siapa?","ki"],
+      ["Quoi ?","Apa?","kwa"],
+      ["Où ?","Di mana?","u"],
+      ["Quand ?","Kapan?","kan~"],
+      ["Comment ?","Bagaimana?","ko-man~"],
+      ["Pourquoi ?","Kenapa?","puR-kwa"],
+      ["Combien ?","Berapa?","kon~-byin~"],
+      ["Qu'est-ce que c'est ?","Apa ini / itu?","kès-kë sè"],
+      ["Est-ce que tu aimes le chocolat ?","Apakah kamu suka cokelat?","ès-kë tü èm lë syo-ko-la"]]},
+  { t:"Les jours", ti:"Hari",
+    intro:"Hari-hari dalam seminggu. Di Prancis, minggu dimulai hari Senin (lundi).",
+    prof:"Lui faire dire son programme de la semaine : « Lundi, je vais à l'école… ». Mentionner que le mercredi après-midi est souvent libre au collège (moins au lycée).",
+    items:[
+      ["lundi","Senin","lin~-di"],["mardi","Selasa","maR-di"],["mercredi","Rabu","mèR-kRë-di"],
+      ["jeudi","Kamis","zhö-di"],["vendredi","Jumat","van~-dRë-di"],["samedi","Sabtu","sam-di"],
+      ["dimanche","Minggu","di-man~sy"],["aujourd'hui","hari ini","o-zhuR-düi"],["demain","besok","dë-min~"],
+      ["hier","kemarin","yèR"],["le week-end","akhir pekan","lë wi-kènd"]]},
+  { t:"L'heure", ti:"Jam",
+    intro:"Orang Prancis sering memakai format 24 jam: 20h = huit heures du soir (jam 8 malam). Makan siang sekitar jam 12–13, makan malam sekitar jam 19.30–20.30.",
+    prof:"Liaisons : trois‿heures (tRwa-zöR), huit‿heures (üi-töR). Les horaires des repas sont souvent un choc culturel : à expliquer.",
+    items:[
+      ["Quelle heure est-il ?","Jam berapa sekarang?","kè-löR è-til"],
+      ["Il est huit heures.","Sekarang jam delapan.","i-lè üi-töR"],
+      ["Il est midi.","Sekarang jam 12 siang.","i-lè mi-di"],
+      ["Il est minuit.","Sekarang jam 12 malam.","i-lè mi-nüi"],
+      ["Il est trois heures et demie.","Sekarang jam setengah empat (3.30).","i-lè tRwa-zöR é dë-mi"],
+      ["le matin","pagi","lë ma-tin~"],
+      ["l'après-midi","siang / sore","la-pRè-mi-di"],
+      ["le soir","malam","lë swaR"],
+      ["à sept heures","pada jam tujuh","a sè-töR"]]},
+  { t:"J'aime, je n'aime pas", ti:"Suka & tidak suka",
+    intro:"Bicara tentang kesukaanmu. Setelah j'aime / j'adore / je déteste, pakai <b>le / la / les</b>: J'aime <b>la</b> musique.",
+    prof:"Après aimer/adorer/détester : article défini obligatoire (« j'aime le chocolat », jamais « j'aime chocolat »). La faire parler de ses passions.",
+    items:[
+      ["J'aime la musique.","Saya suka musik.","zhèm la mü-zik"],
+      ["J'adore danser.","Saya suka sekali menari.","zha-doR dan~-sé"],
+      ["Je déteste le froid.","Saya benci dingin.","zhë dé-tèst lë fRwa"],
+      ["Tu aimes la K-pop ?","Kamu suka K-pop?","tü èm la ka-pop"],
+      ["Je préfère le thé.","Saya lebih suka teh.","zhë pRé-fèR lë té"],
+      ["J'écoute de la musique.","Saya mendengarkan musik.","zhé-kut dë la mü-zik"]]}],
+  dialog:[
+    ["a","Qu'est-ce que tu fais le samedi ?","Kamu ngapain hari Sabtu?"],
+    ["b","Le samedi, j'écoute de la musique.","Hari Sabtu, saya mendengarkan musik."],
+    ["a","Tu aimes danser ?","Kamu suka menari?"],
+    ["b","Oui, j'adore danser !","Ya, saya suka sekali menari!"],
+    ["a","Tu parles français ?","Kamu bisa bahasa Prancis?"],
+    ["b","Je parle un peu français.","Saya bisa sedikit bahasa Prancis."],
+    ["a","Quelle heure est-il ?","Jam berapa sekarang?"],
+    ["b","Il est huit heures.","Sekarang jam delapan."],
+    ["a","On va au cinéma demain ?","Besok kita ke bioskop?"],
+    ["b","Oui, je veux bien !","Ya, mau!"]]},
+
+/* ------------------------------ COURS 4 ------------------------------ */
+{ emoji:"🥖", fr:"Vivre en France", title:"Hidup di Prancis",
+  goal:"Kalimat penyelamat, makan, belanja, sekolah, transportasi, dan darurat.",
+  plan:[
+    "5 min — Révision : verbes en -er + négation + son programme de la semaine.",
+    "15 min — Phrases de survie : les plus importantes du programme, à savoir par cœur. Aucune honte à demander de répéter.",
+    "10 min — À table : horaires, « bon appétit », le pain sur la table, ses habitudes alimentaires.",
+    "10 min — Boulangerie / magasin : jeu de rôle complet (cf. la mission).",
+    "10 min — Le lycée + se déplacer : système scolaire, vouvoyer les profs ; jeu « à droite, à gauche ».",
+    "10 min — Urgences : enregistrer 112, 15, 17, 18 dans son téléphone. J'ai mal à…"],
+  sections:[
+  { t:"Phrases de survie", ti:"Kalimat penyelamat",
+    intro:"Kalimat <b>penyelamat</b>! Kalau tidak mengerti, jangan diam — pakai kalimat ini. Orang Prancis akan senang membantu. 💪",
+    prof:"Les phrases les plus importantes de tout le programme. Les faire apprendre par cœur et les ressortir dans toutes les situations des jours suivants.",
+    items:[
+      ["Pouvez-vous répéter, s'il vous plaît ?","Bisa diulang, tolong?","pu-vé vu Ré-pé-té sil vu plè"],
+      ["Plus lentement, s'il vous plaît.","Tolong lebih pelan.","plü lan~t-man~ sil vu plè"],
+      ["Comment on dit ça en français ?","Apa bahasa Prancisnya ini?","ko-man~-ton~ di sa an~ fRan~-sè"],
+      ["Qu'est-ce que ça veut dire ?","Apa artinya itu?","kès-kë sa vö diR"],
+      ["Vous parlez anglais ?","Anda bisa bahasa Inggris?","vu paR-lé an~-glè"],
+      ["Je suis perdue.","Saya tersesat. (perempuan)","zhë süi pèR-dü"],
+      ["Où sont les toilettes ?","Toiletnya di mana?","u son~ lé twa-lèt"],
+      ["J'ai besoin d'aide.","Saya butuh bantuan.","zhé bë-zwin~ dèd"],
+      ["Je suis nouvelle ici.","Saya baru di sini. (perempuan)","zhë süi nu-vèl i-si"],
+      ["Je suis désolée.","Saya minta maaf. (perempuan)","zhë süi dé-zo-lé"]]},
+  { t:"À table", ti:"Di meja makan",
+    intro:"Di Prancis, makan bersama di meja itu penting: 3 kali makan dengan jam tetap. Sebelum makan bilang « Bon appétit ! ». Roti selalu ada di meja, keju dimakan setelah hidangan utama.",
+    prof:"On ne grignote pas entre les repas (sauf le goûter vers 16h), le pain est posé sur la table, le fromage vient après le plat. Adapter selon ses habitudes alimentaires (porc, épices, riz…).",
+    items:[
+      ["J'ai faim.","Saya lapar.","zhé fin~"],
+      ["J'ai soif.","Saya haus.","zhé swaf"],
+      ["le petit-déjeuner","sarapan","lë pë-ti-dé-zhö-né"],
+      ["le déjeuner","makan siang","lë dé-zhö-né"],
+      ["le dîner","makan malam","lë di-né"],
+      ["le pain","roti","lë pin~"],
+      ["le fromage","keju","lë fRo-mazh"],
+      ["l'eau","air","lo"],
+      ["le poulet","ayam","lë pu-lè"],
+      ["le riz","nasi / beras","lë Ri"],
+      ["les légumes","sayuran","lé lé-güm"],
+      ["les fruits","buah-buahan","lé fRüi"],
+      ["Je ne mange pas de porc.","Saya tidak makan daging babi.","zhën man~zh pa dë poR"],
+      ["C'est délicieux !","Enak sekali!","sè dé-li-syö"],
+      ["Bon appétit !","Selamat makan!","bo-na-pé-ti"],
+      ["Encore un peu, s'il te plaît.","Tambah sedikit lagi, tolong.","an~-koR in~ pö sil të plè"]]},
+  { t:"À la boulangerie, au magasin", ti:"Di toko roti & toko",
+    intro:"Di toko: masuk → « Bonjour ! » · pesan dengan « Je voudrais… » (lebih sopan daripada « je veux ») · keluar → « Merci, bonne journée ! ».",
+    prof:"Faire le jeu de rôle complet de la boulangerie (c'est la mission de ce cours). « Je voudrais » plutôt que « je veux ». Défi : qu'elle aille acheter le pain seule dès les premiers jours en France !",
+    items:[
+      ["Je voudrais une baguette, s'il vous plaît.","Saya mau satu baguette, tolong.","zhë vu-dRè ün ba-gèt sil vu plè"],
+      ["C'est combien ?","Berapa harganya?","sè kon~-byin~"],
+      ["Ça fait deux euros.","Totalnya dua euro.","sa fè dö-zö-Ro"],
+      ["Voilà.","Ini. (saat memberi sesuatu)","vwa-la"],
+      ["Je peux payer par carte ?","Bisa bayar pakai kartu?","zhë pö pè-yé paR kaRt"],
+      ["Je regarde seulement, merci.","Saya lihat-lihat saja, terima kasih.","zhë Rë-gaRd söl-man~ mèR-si"],
+      ["Bonne journée !","Semoga harimu menyenangkan!","bon zhuR-né"]]},
+  { t:"Au lycée", ti:"Di sekolah (SMA)",
+    intro:"SMA di Prancis = <b>le lycée</b> (umur 15–18). Ke guru selalu pakai « vous » dan « Madame / Monsieur ». Ke teman pakai « tu ».",
+    prof:"Expliquer le système : seconde / première / terminale, la cantine, la récré, le bac. Vouvoyer les profs, tutoyer les élèves.",
+    items:[
+      ["le lycée","SMA","lë li-sé"],
+      ["la classe","kelas","la klas"],
+      ["le professeur / la prof","guru","lë pRo-fè-söR / la pRof"],
+      ["l'élève","murid","lé-lèv"],
+      ["le cours","pelajaran","lë kuR"],
+      ["les devoirs","PR (pekerjaan rumah)","lé dë-vwaR"],
+      ["le cahier","buku tulis","lë ka-yé"],
+      ["le stylo","pulpen","lë sti-lo"],
+      ["la récré","jam istirahat","la Ré-kRé"],
+      ["la cantine","kantin sekolah","la kan~-tin"],
+      ["Je peux aller aux toilettes ?","Boleh saya ke toilet?","zhë pö a-lé o twa-lèt"]]},
+  { t:"Se déplacer", ti:"Transportasi & arah",
+    intro:"Arah dan transportasi. Di bus, bilang « Bonjour » ke sopir!",
+    prof:"Jeu : la guider dans la pièce (ou dans la rue) uniquement en français : à droite, à gauche, tout droit, stop !",
+    items:[
+      ["le bus","bus","lë büs"],
+      ["le train","kereta api","lë tRin~"],
+      ["la gare","stasiun","la gaR"],
+      ["à droite","ke kanan","a dRwat"],
+      ["à gauche","ke kiri","a gosy"],
+      ["tout droit","lurus terus","tu dRwa"],
+      ["C'est loin ?","Jauh?","sè lwin~"],
+      ["C'est près d'ici.","Dekat dari sini.","sè pRè di-si"],
+      ["Un billet, s'il vous plaît.","Satu tiket, tolong.","in~ bi-yè sil vu plè"]]},
+  { t:"Urgences", ti:"Darurat",
+    intro:"Nomor darurat: <b>112</b> (darurat Eropa, bisa bahasa Inggris) · <b>15</b> ambulans · <b>17</b> polisi · <b>18</b> pemadam kebakaran. Simpan di HP-mu! 📱",
+    prof:"Enregistrer les numéros dans son téléphone pendant le cours. Ajouter le numéro de la maison et les vôtres. « J'ai mal à la / au … » + partie du corps.",
+    items:[
+      ["Au secours !","Tolong!","o së-kuR"],
+      ["Je suis malade.","Saya sakit.","zhë süi ma-lad"],
+      ["J'ai mal à la tête.","Kepala saya sakit.","zhé ma-la la tèt"],
+      ["J'ai mal au ventre.","Perut saya sakit.","zhé ma-lo van~tR"],
+      ["Appelez le 112 !","Telepon 112! (darurat)","a-pë-lé lë san~-duz"],
+      ["la pharmacie","apotek","la faR-ma-si"],
+      ["le médecin","dokter","lë méd-sin~"]]}],
+  dialog:[
+    ["a","Bonjour mademoiselle !","Selamat pagi, Nona!"],
+    ["b","Bonjour madame !","Selamat pagi, Bu!"],
+    ["a","Qu'est-ce que vous voulez ?","Mau beli apa?"],
+    ["b","Je voudrais une baguette, s'il vous plaît.","Saya mau satu baguette, tolong."],
+    ["a","Voilà. Autre chose ?","Ini. Ada lagi?"],
+    ["b","Non merci. C'est combien ?","Tidak, terima kasih. Berapa?"],
+    ["a","Un euro vingt, s'il vous plaît.","Satu euro dua puluh sen."],
+    ["b","Je peux payer par carte ?","Bisa bayar pakai kartu?"],
+    ["a","Bien sûr. Merci, bonne journée !","Tentu. Terima kasih, semoga harimu menyenangkan!"],
+    ["b","Merci, bonne journée !","Terima kasih, semoga harimu menyenangkan!"]]}
+];
+
+const EXOS = [
+  {id:"flash",  em:"🃏", t:"Kartu hafalan",     d:"Lihat, dengar, balik kartunya. Hafalkan!",           min:10},
+  {id:"listen", em:"👂", t:"Dengar & pilih",    d:"Dengarkan kata Prancis, pilih artinya.",             min:8},
+  {id:"trans",  em:"🔁", t:"Terjemahkan",       d:"Pilih kata Prancis yang benar.",                     min:7},
+  {id:"speak",  em:"🎤", t:"Ucapkan!",          d:"Bicara ke mikrofon, aplikasi menilai pelafalanmu.",  min:12},
+  {id:"build",  em:"🧩", t:"Susun kalimat",     d:"Susun kata-kata menjadi kalimat yang benar.",        min:7},
+  {id:"dictee", em:"✍️", t:"Dikte",             d:"Dengarkan, lalu tulis dalam bahasa Prancis.",        min:6},
+  {id:"memory", em:"🧠", t:"Memory",            d:"Temukan pasangan Prancis ↔ Indonesia.",              min:4},
+  {id:"speed",  em:"⚡", t:"Tantangan kilat",    d:"60 detik: jawab sebanyak mungkin!",                  min:3},
+  {id:"mission",em:"🎬", t:"Misi: percakapan",   d:"Bermain peran: jawab dengan suaramu.",               min:5}
+];
+
+const LEVELS=[[0,"🐣","Pemula"],[150,"🥐","Petit croissant"],[400,"🥖","Baguette"],[800,"🧀","Camembert"],[1300,"🗼","Tour Eiffel"],[2000,"💫","Vraie Parisienne"]];
+
+/* ============================== ÉTAT ============================== */
+const KEY="petitapetit_v1";
+let S=Object.assign({name:"",xp:0,mastered:{},done:{},best:{},courseDone:{},prof:false},JSON.parse(localStorage.getItem(KEY)||"{}"));
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function addXP(n){S.xp+=n;save();renderTop()}
+function level(){let l=LEVELS[0];for(const x of LEVELS)if(S.xp>=x[0])l=x;return l}
+function nextLevel(){return LEVELS.find(x=>x[0]>S.xp)}
+
+/* ============================== OUTILS ============================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nm=s=>String(s).replace(/\{nom\}/g,S.name||"Sari");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const first=fr=>fr.split(" / ")[0];
+function toast(m,ms=2200){const t=$("#toast");t.innerHTML=m;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),ms)}
+function confetti(){const e=["🎉","⭐","🇫🇷","🥐","💖","✨"];for(let i=0;i<26;i++){const s=document.createElement("span");s.className="confetti";s.textContent=e[i%e.length];s.style.left=Math.random()*100+"vw";s.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),3200)}}
+function pool(li){const r=[];LESSONS[li].sections.forEach((s,si)=>s.items.forEach((it,ii)=>r.push({fr:it[0],id:it[1],p:it[2],key:li+"-"+si+"-"+ii})));return r}
+function cleanId(s){return nm(s).replace(/\s—.*$/,"")}
+
+/* ============================== VOIX (TTS) ============================== */
+let VOICE=null;
+function pickVoice(){const v=speechSynthesis.getVoices();const fr=v.filter(x=>/^fr/i.test(x.lang));VOICE=fr.find(x=>/fr[-_]FR/i.test(x.lang)&&/google|amélie|amelie|audrey|marie|thomas|denise|hortense|julie/i.test(x.name))||fr.find(x=>/fr[-_]FR/i.test(x.lang))||fr[0]||null}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(text,slow){if(!("speechSynthesis" in window))return toast("Browser ini tidak bisa bersuara 😕");speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(nm(first(text)).replace(/\s—.*$/,""));u.lang="fr-FR";if(VOICE)u.voice=VOICE;u.rate=slow?0.55:0.85;speechSynthesis.speak(u);return u}
+
+/* ============================== RECONNAISSANCE VOCALE ============================== */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function frNum(n){const u=["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"],t={2:"vingt",3:"trente",4:"quarante",5:"cinquante",6:"soixante"};
+  if(n<20)return u[n];if(n<70){const d=n/10|0,r=n%10;return t[d]+(r==0?"":r==1?" et un":"-"+u[r])}
+  if(n<80)return n==71?"soixante et onze":"soixante-"+u[n-60];if(n<100)return n==80?"quatre-vingts":"quatre-vingt-"+u[n-80];
+  if(n<1000){const c=n/100|0,r=n%100;return(c==1?"cent":u[c]+" cent")+(r?" "+frNum(r):"")}return String(n)}
+function norm(s){s=nm(s).toLowerCase().replace(/œ/g,"oe").replace(/æ/g,"ae");
+  s=s.replace(/(\d+)[,.](\d+)\s*€/g,"$1 euro $2").replace(/(\d+)\s*€/g,"$1 euros").replace(/(\d+)\s*h\s*(\d+)/g,"$1 heures $2").replace(/(\d+)\s*h\b/g,"$1 heures").replace(/\d+/g,m=>frNum(+m));
+  s=s.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  return s.replace(/[’'\-«»…]/g," ").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;let p=Array(n+1).fill(0).map((_,j)=>j);for(let i=1;i<=m;i++){const c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]==b[j-1]?0:1));p=c}return p[n]}
+const wEq=(a,b)=>a==b||(a.length>=4&&b.length>=4&&lev(a,b)<=1);
+/* compare cible ↔ entendu : renvoie {score, words:[{w,ok}]} */
+function compare(target,heard){
+  const words=nm(target).split(/\s+/).filter(w=>norm(w));
+  const tt=[];words.forEach((w,wi)=>norm(w).split(" ").forEach(tok=>tt.push({tok,wi})));
+  const ht=norm(heard).split(" ").filter(Boolean);
+  const m=tt.length,n=ht.length,L=Array(m+1).fill(0).map(()=>Array(n+1).fill(0));
+  for(let i=m-1;i>=0;i--)for(let j=n-1;j>=0;j--)L[i][j]=wEq(tt[i].tok,ht[j])?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  const okTok=new Set();let i=0,j=0;while(i<m&&j<n){if(wEq(tt[i].tok,ht[j])){okTok.add(i);i++;j++}else if(L[i+1][j]>=L[i][j+1])i++;else j++}
+  const wOk=words.map((w,wi)=>tt.every((t,k)=>t.wi!=wi||okTok.has(k)));
+  const a=norm(target),b=norm(heard);const cs=1-lev(a,b)/Math.max(a.length,b.length,1);
+  const wr=m?okTok.size/m:0;
+  return{score:Math.max(0,Math.round(100*(0.5*cs+0.5*wr))),words:words.map((w,k)=>({w,ok:wOk[k]}))}}
+function starsOf(sc){return sc>=85?3:sc>=65?2:sc>=40?1:0}
+const STARTXT=n=>"⭐".repeat(n)+"☆".repeat(3-n);
+const TIPS=[
+  [/(^|[^oaeéqg])u|û/,"🎯 <b>U</b> (tu, salut): bilang « i », lalu bulatkan bibir seperti mau bersiul — lidah tetap di depan. Bukan « u »!"],
+  [/ou|où/,"🎯 <b>OU</b> = « u » Indonesia biasa (vous = vu)."],
+  [/eu|œu|œ/,"🎯 <b>EU</b> (deux, sœur): bilang « e », lalu bulatkan bibir."],
+  [/(an|am|en|em|on|om|in|im|ain|ein|un)(?![aeiouyéèênm])/,"🎯 <b>Bunyi hidung</b> (bon, enfant, pain): udara keluar lewat hidung, mulut tetap terbuka, <b>jangan</b> ucapkan n / ng di akhir."],
+  [/r/,"🎯 <b>R Prancis</b>: dari tenggorokan, seperti berkumur pelan — bukan r bergetar di lidah."],
+  [/j|g[eiyé]/,"🎯 <b>J / GE</b> (je, rouge): seperti « sy » tapi dengan suara (zh)."],
+  [/ch/,"🎯 <b>CH</b> dibaca « sy » (chat = sya)."],
+  [/[stdxzp]$/,"🎯 Huruf <b>terakhir</b> biasanya tidak dibaca (petit = pë-ti, deux = dö)."],
+  [/é|er$|ez$/,"🎯 <b>É / -ER / -EZ</b> dibaca « é » seperti di « sate »."]];
+function tipsFor(words){const out=[];const miss=words.filter(w=>!w.ok).map(w=>w.w.toLowerCase());const pool=miss.length?miss:words.map(w=>w.w.toLowerCase());
+  for(const [re,t] of TIPS){if(pool.some(w=>re.test(w))&&!out.includes(t))out.push(t);if(out.length>=2)break}return out}
+let REC=null;
+function listen(target,onRes,btn){
+  if(!SR){toast("Pengenalan suara tidak tersedia di browser ini. Pakai <b>Google Chrome</b> 🙏",4000);return}
+  if(REC){try{REC.abort()}catch(e){}REC=null;btn&&btn.classList.remove("rec");return}
+  speechSynthesis&&speechSynthesis.cancel();if(MR&&MR.state=="recording")MR.stop();
+  const r=new SR();REC=r;r.lang="fr-FR";r.maxAlternatives=5;r.interimResults=false;r.continuous=false;
+  btn&&btn.classList.add("rec");let got=false;
+  r.onresult=e=>{got=true;const res=e.results[0];let best=null;for(let k=0;k<res.length;k++){const c=compare(target,res[k].transcript);if(!best||c.score>best.score)best={...c,heard:res[k].transcript}}onRes(best)};
+  r.onerror=e=>{if(e.error=="no-speech")toast("Aku tidak mendengar apa-apa 🙉 Coba lagi, bicara lebih keras.");else if(e.error=="not-allowed"||e.error=="service-not-allowed")toast("Mikrofon diblokir. Izinkan mikrofon di browser 🎤",4000);else if(e.error=="audio-capture")micProblem();else if(e.error=="network")toast("Pengenalan suara butuh internet 🌐 (koneksi terputus?)",4000);else if(e.error!="aborted")toast("Error: "+e.error)};
+  r.onend=()=>{REC=null;btn&&btn.classList.remove("rec");if(!got)onRes(null)};
+  try{r.start()}catch(e){REC=null;btn&&btn.classList.remove("rec")}}
+function resultHTML(res){if(!res)return"";const st=starsOf(res.score);
+  const msg=st==3?"Parfait ! 🎉":st==2?"Très bien ! 👏":st==1?"Pas mal ! Coba lagi 💪":"Coba lagi, pelan-pelan 🙂";
+  return `<div class="score" style="color:${st>=2?"var(--ok)":st==1?"#d97706":"var(--ko)"}">${res.score}%</div><div class="stars">${STARTXT(st)}</div><div><b>${msg}</b></div>
+  <div style="margin-top:8px;font-size:20px">${res.words.map(w=>`<span class="${w.ok?"w-ok":"w-ko"}">${esc(w.w)}</span>`).join(" ")}</div>
+  <div class="mut">Aku mendengar: « ${esc(res.heard)} »</div>${st<3?tipsFor(res.words).map(t=>`<div class="tip">${t}</div>`).join(""):""}`}
+
+/* Enregistrement de sa propre voix (pour se réécouter) */
+let MR=null;
+async function recordSelf(btn,outId){
+  if(MR&&MR.state=="recording"){MR.stop();return}
+  try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const ch=[];MR=new MediaRecorder(st);
+    MR.ondataavailable=e=>ch.push(e.data);
+    MR.onstop=()=>{st.getTracks().forEach(t=>t.stop());const url=URL.createObjectURL(new Blob(ch,{type:MR.mimeType||"audio/webm"}));const o=document.getElementById(outId);if(o)o.innerHTML=`<audio controls src="${url}" style="width:100%;margin-top:8px"></audio><div class="mut">▶ Dengarkan suaramu, lalu bandingkan dengan 🔊</div>`;o&&o.querySelector("audio").play();btn.textContent="🎙️ Rekam suaraku";MR=null};
+    MR.start();btn.textContent="⏹️ Stop";setTimeout(()=>{if(MR&&MR.state=="recording")MR.stop()},6000)}
+  catch(e){toast("Mikrofon tidak bisa dipakai 😕")}}
+
+/* ============================== ÉCRANS ============================== */
+let CUR={view:"home"};
+function renderTop(){const l=level(),nx=nextLevel();
+  $("#top").innerHTML=`<div class="logo" onclick="go('home')">Petit <span>à</span> petit 🇫🇷</div><div class="sp"></div>
+  <div class="xp" title="${nx?"Level berikutnya: "+nx[2]+" ("+nx[0]+" XP)":""}">${l[1]} ${S.xp} XP</div>
+  <button onclick="showHelp()">❓</button><button class="${S.prof?"on":""}" onclick="toggleProf()" title="Mode guru">👩‍🏫</button>`}
+function toggleProf(){S.prof=!S.prof;save();renderTop();toast(S.prof?"👩‍🏫 Mode guru: catatan untuk guru ditampilkan":"Mode guru dimatikan");if(CUR.view=="lesson")go("lesson",CUR.li,CUR.tab)}
+function go(view,li,tab){stopAll();CUR={view,li,tab:tab||"cours"};window.scrollTo(0,0);
+  if(view=="home")home();else if(view=="lesson")lesson(li,CUR.tab)}
+function stopAll(){if(REC){try{REC.abort()}catch(e){}REC=null}if(MR&&MR.state=="recording")MR.stop();speechSynthesis&&speechSynthesis.cancel();clearInterval(SPD.h)}
+function lessonProgress(li){const d=S.done[li]||{};return Math.round(100*((S.courseDone[li]?1:0)+EXOS.filter(e=>d[e.id]).length)/(EXOS.length+1))}
+
+function home(){const l=level(),nx=nextLevel();
+  $("#app").innerHTML=`<div class="card" style="background:linear-gradient(135deg,#fff,var(--rose))">
+    <h1>Halo ${esc(S.name)}! 👋</h1>
+    <div>Selamat datang di <b>Petit à petit</b> — <i>sedikit demi sedikit</i>. 4 pelajaran untuk mulai berbicara bahasa Prancis sebelum tiba di Prancis 🇫🇷✈️</div>
+    <div class="mut" style="margin-top:8px">${l[1]} Level: <b>${l[2]}</b> · ${S.xp} XP ${nx?`· ${nx[0]-S.xp} XP lagi untuk ${nx[1]} ${nx[2]}`:""}</div>
+    <div class="bar"><i style="width:${nx?Math.round(100*(S.xp-l[0])/(nx[0]-l[0])):100}%"></i></div></div>
+    ${!SR?`<div class="warn">⚠️ Browser ini tidak bisa menilai pelafalan. Buka aplikasi ini di <b>Google Chrome</b> (laptop atau Android) untuk latihan 🎤.</div>`:""}
+    <div class="grid">${LESSONS.map((L,i)=>`<div class="card lesson" onclick="go('lesson',${i})">
+      <div class="n">Pelajaran ${i+1}</div><div class="big">${L.emoji}</div><h2 style="margin:4px 0">${L.fr}</h2>
+      <div><b>${L.title}</b></div><div class="mut">${L.goal}</div><div class="bar"><i style="width:${lessonProgress(i)}%"></i></div></div>`).join("")}</div>
+    <div class="row"><button class="ghost sm" onclick="askName(true)">✏️ Ganti nama</button><button class="ghost sm" onclick="resetAll()">↺ Reset</button></div>`}
+
+function lesson(li,tab){const L=LESSONS[li];
+  let h=`<button class="ghost sm" onclick="go('home')">← Kembali</button>
+  <h1>${L.emoji} Pelajaran ${li+1}: ${L.fr}</h1><div class="mut">${L.title} — ${L.goal}</div>
+  <div class="tabs"><button class="${tab=="cours"?"on":""}" onclick="go('lesson',${li},'cours')">📖 Teori (1 jam)</button><button class="${tab=="exos"?"on":""}" onclick="go('lesson',${li},'exos')">🎮 Latihan (1 jam)</button></div>`;
+  if(tab=="cours"){
+    if(S.prof)h+=`<div class="prof"><b>👩‍🏫 Plan du cours (60 min)</b><br>${L.plan.map(p=>"• "+p).join("<br>")}<br><br>Astuce : cliquez 🔊 pour la prononciation de référence, 🐢 pour ralentir, 🎤 pour qu'elle teste sa prononciation sur un mot.</div>`;
+    L.sections.forEach((s,si)=>{h+=`<div class="card"><h2>${si+1}. ${s.t}</h2><div class="mut" style="margin-top:-8px">${s.ti}</div>
+      <div class="intro">${s.intro}</div>${S.prof?`<div class="prof"><b>👩‍🏫 Pour la prof :</b> ${s.prof}</div>`:""}
+      ${s.items.map((it,ii)=>`<div class="item"><div class="t"><div class="fr">${esc(nm(it[0]))}</div><div class="pr">${esc(nm(it[2]))}</div><div class="id">${esc(nm(it[1]))}</div><div class="res" id="r-${si}-${ii}"></div></div>
+        <button class="sm" onclick="say(LESSONS[${li}].sections[${si}].items[${ii}][0])">🔊</button><button class="sm" onclick="say(LESSONS[${li}].sections[${si}].items[${ii}][0],1)">🐢</button><button class="sm" onclick="quickMic(this,${li},${si},${ii})">🎤</button></div>`).join("")}</div>`});
+    h+=`<div class="center"><button class="pri" onclick="S.courseDone[${li}]=true;save();addXP(30);confetti();go('lesson',${li},'exos')">✅ Teori selesai! Ke latihan →</button></div>`}
+  else{
+    h+=`<div class="intro">🎧 Pakai headset + mikrofon. Ikuti urutan di bawah (± 1 jam). Setiap latihan bisa diulang sebanyak yang kamu mau — soalnya selalu berubah!</div>
+    ${S.prof?`<div class="prof"><b>👩‍🏫 Pour la prof :</b> elle peut faire les exercices seule. Le score de prononciation (🎤) utilise la reconnaissance vocale de Chrome : c'est un bon indicateur (si Chrome comprend, un Français comprendra), mais pas un phonéticien. Les mots en rouge sont ceux qui n'ont pas été reconnus. Repassez derrière elle sur les sons difficiles.</div>`:""}`;
+    const d=S.done[li]||{};
+    EXOS.forEach((e,k)=>{h+=`<div class="card ex" onclick="startEx(${li},'${e.id}')"><div class="em">${e.em}</div><div class="t"><b>${k+1}. ${e.t}</b> <span class="mut">· ${e.min} mnt</span><div class="mut">${e.d}</div>${S.best[li+e.id]!=null?`<div class="mut">🏆 Terbaik: ${S.best[li+e.id]}${e.id=="speed"?"":"%"}</div>`:""}</div><div class="chk">${d[e.id]?"✅":"▶️"}</div></div>`})}
+  $("#app").innerHTML=h}
+function quickMic(btn,li,si,ii){const it=LESSONS[li].sections[si].items[ii];const out=document.getElementById(`r-${si}-${ii}`);out.innerHTML="🎙️ Bicara sekarang…";
+  listen(first(it[0]),res=>{if(!res){out.innerHTML="";return}const st=starsOf(res.score);out.innerHTML=`<span style="font-size:16px">${STARTXT(st)} ${res.score}%</span> — ${res.words.map(w=>`<span class="${w.ok?"w-ok":"w-ko"}">${esc(w.w)}</span>`).join(" ")} <span class="mut">(« ${esc(res.heard)} »)</span>`},btn)}
+
+function finish(li,ex,pct,extra){S.done[li]=S.done[li]||{};S.done[li][ex]=true;const k=li+ex;if(S.best[k]==null||pct>S.best[k])S.best[k]=pct;save();
+  const st=ex=="speed"?(pct>=20?3:pct>=12?2:pct>=6?1:0):starsOf(pct);if(st>=2)confetti();
+  $("#app").innerHTML=`<div class="card center"><div style="font-size:60px">${st==3?"🏆":st==2?"🎉":st==1?"👍":"💪"}</div><h1>${st==3?"Luar biasa!":st==2?"Bagus sekali!":st==1?"Lumayan!":"Terus berlatih!"}</h1>
+  <div class="score">${ex=="speed"?pct+" ✓":pct+"%"}</div><div class="stars">${STARTXT(st)}</div>${extra||""}
+  <div class="row"><button class="pri" onclick="startEx(${li},'${ex}')">🔁 Main lagi</button><button onclick="go('lesson',${li},'exos')">← Daftar latihan</button></div></div>`}
+function header(li,title,i,n){return `<button class="ghost sm" onclick="go('lesson',${li},'exos')">✕ Keluar</button><div class="mut center">${title} — ${i+1} / ${n}</div><div class="bar"><i style="width:${Math.round(100*i/n)}%"></i></div>`}
+function startEx(li,ex){stopAll();window.scrollTo(0,0);({flash,listen:quiz,trans:quiz,speak,build,dictee,memory,speed,mission})[ex](li,ex)}
+
+/* ---------- 1. Kartu hafalan ---------- */
+let FL;
+function flash(li){const p=pool(li);const notM=shuffle(p.filter(x=>!S.mastered[x.key])),m=shuffle(p.filter(x=>S.mastered[x.key]));FL={li,deck:notM.concat(m).slice(0,20),i:0,known:0,flip:false};flashShow()}
+function flashShow(){const it=FL.deck[0];if(!it)return finish(FL.li,"flash",Math.round(100*FL.known/Math.max(FL.i,1)),`<div class="mut">${Object.keys(S.mastered).filter(k=>k.startsWith(FL.li+"-")).length} / ${pool(FL.li).length} kata sudah hafal di pelajaran ini</div>`);
+  $("#app").innerHTML=`<button class="ghost sm" onclick="go('lesson',${FL.li},'exos')">✕ Keluar</button><div class="mut center">🃏 Sisa kartu: ${FL.deck.length}</div>
+  <div class="card flash center" onclick="FL.flip=!FL.flip;flashShow()">
+   ${FL.flip?`<div class="huge" style="font-size:26px">${esc(cleanId(it.id))}</div><div class="fr">${esc(nm(it.fr))}</div><div class="pr" style="font-size:18px">${esc(nm(it.p))}</div>`
+   :`<div class="huge">${esc(nm(it.fr))}</div><div class="mut">👆 Ketuk untuk melihat arti</div>`}</div>
+  <div class="row"><button onclick="say(FL.deck[0].fr)">🔊 Dengar</button><button onclick="say(FL.deck[0].fr,1)">🐢 Pelan</button></div>
+  <div class="row"><button class="red" onclick="flashAns(0)">🔁 Belum hafal</button><button class="pri" onclick="flashAns(1)">✅ Sudah hafal</button></div>`;
+  if(!FL.flip)say(it.fr)}
+function flashAns(k){const it=FL.deck.shift();FL.i++;FL.flip=false;if(k){FL.known++;if(!S.mastered[it.key]){S.mastered[it.key]=1;addXP(5)}save()}else{delete S.mastered[it.key];save();FL.deck.splice(Math.min(3,FL.deck.length),0,it)}flashShow()}
+
+/* ---------- 2/3. QCM écoute & traduction ---------- */
+let QZ;
+function quiz(li,ex){QZ={li,ex,list:shuffle(pool(li)).slice(0,10),i:0,ok:0};quizShow()}
+function options(li,it){const others=shuffle(pool(li).filter(x=>cleanId(x.id)!=cleanId(it.id)&&first(x.fr)!=first(it.fr))).slice(0,3);return shuffle([it,...others])}
+function quizShow(){const it=QZ.list[QZ.i];if(!it)return finish(QZ.li,QZ.ex,Math.round(100*QZ.ok/QZ.list.length));
+  const op=options(QZ.li,it);QZ.op=op;QZ.answered=false;const listenMode=QZ.ex=="listen";
+  $("#app").innerHTML=header(QZ.li,listenMode?"👂 Dengar & pilih":"🔁 Terjemahkan",QZ.i,QZ.list.length)+`<div class="card center">
+   ${listenMode?`<div class="mut">Dengarkan, lalu pilih artinya</div><div class="row"><button class="pri" style="font-size:30px;padding:18px 28px" onclick="say(QZ.list[QZ.i].fr)">🔊</button><button style="font-size:24px" onclick="say(QZ.list[QZ.i].fr,1)">🐢</button></div>`
+   :`<div class="mut">Bagaimana bilang ini dalam bahasa Prancis?</div><div class="huge" style="font-size:28px">${esc(cleanId(it.id))}</div>`}
+   <div class="choices">${op.map((o,k)=>`<button id="o${k}" onclick="quizAns(${k})">${esc(listenMode?cleanId(o.id):nm(o.fr))}</button>`).join("")}</div><div id="fb"></div></div>`;
+  if(listenMode)setTimeout(()=>say(it.fr),300)}
+function quizAns(k){if(QZ.answered)return;QZ.answered=true;const it=QZ.list[QZ.i],good=QZ.op[k]===it;
+  QZ.op.forEach((o,j)=>{if(o===it)$("#o"+j).classList.add("good");else if(j==k)$("#o"+j).classList.add("bad")});
+  if(good){QZ.ok++;addXP(10)}say(it.fr);
+  $("#fb").innerHTML=`<div style="margin-top:12px"><b>${good?"✅ Benar!":"❌ Jawabannya:"}</b> <span class="fr">${esc(nm(it.fr))}</span> <span class="pr">${esc(nm(it.p))}</span> = ${esc(cleanId(it.id))}</div><div class="row"><button class="pri" onclick="QZ.i++;quizShow()">Lanjut ▶</button></div>`}
+
+/* ---------- 4. Prononciation ---------- */
+let SP;
+function speak(li){SP={li,list:shuffle(pool(li)).slice(0,8),i:0,scores:[],best:0};speakShow()}
+function speakShow(){const it=SP.list[SP.i];if(!it){const avg=Math.round(SP.scores.reduce((a,b)=>a+b,0)/Math.max(SP.scores.length,1));return finish(SP.li,"speak",avg)}
+  SP.best=0;
+  $("#app").innerHTML=header(SP.li,"🎤 Ucapkan!",SP.i,SP.list.length)+`<div class="card center">
+   <div class="mut">Dengarkan dulu, lalu tekan 🎤 dan ucapkan:</div>
+   <div class="huge">${esc(nm(first(it.fr)))}</div><div class="pr" style="font-size:19px">${esc(nm(it.p.split(" / ")[0]))}</div><div class="id">${esc(cleanId(it.id))}</div>
+   <div class="row"><button onclick="say(SP.list[SP.i].fr)">🔊 Dengar</button><button onclick="say(SP.list[SP.i].fr,1)">🐢 Pelan</button></div>
+   ${SR?`<button class="mic" id="mic" onclick="speakGo(this)">🎤</button><div class="mut">Tekan, lalu bicara</div>`
+   :`<div class="warn">Penilaian otomatis butuh Google Chrome. Rekam suaramu, dengarkan, lalu nilai sendiri:</div><div class="row"><button onclick="speakSelf(1)">😕</button><button onclick="speakSelf(2)">🙂</button><button onclick="speakSelf(3)">😃</button></div>`}
+   <div id="res"></div>
+   <div class="row"><button class="sm" onclick="recordSelf(this,'self')">🎙️ Rekam suaraku</button></div><div id="self"></div>
+   <div class="row"><button class="pri" id="nx" onclick="speakNext()">${SR?"Lewati ▶":"Lanjut ▶"}</button></div></div>`;
+  setTimeout(()=>say(it.fr),300)}
+function speakGo(btn){$("#res").innerHTML=`<div class="mut">🎙️ Aku mendengarkan…</div>`;listen(first(SP.list[SP.i].fr),res=>{if(!res){$("#res").innerHTML="";return}
+  $("#res").innerHTML=resultHTML(res);if(res.score>SP.best){addXP(5*Math.max(0,starsOf(res.score)-starsOf(SP.best)));SP.best=res.score}
+  $("#nx").textContent=starsOf(res.score)>=2?"Lanjut ▶":"Lanjut ▶ (atau coba lagi 🎤)"},btn)}
+function speakSelf(n){SP.best=[0,40,70,90][n];addXP(n*3);speakNext()}
+function speakNext(){SP.scores.push(SP.best);SP.i++;speakShow()}
+
+/* ---------- 5. Construire la phrase ---------- */
+let BD;
+function sentencesOf(li){const L=LESSONS[li];const s=pool(li).filter(x=>!x.fr.includes(" / ")&&nm(x.fr).split(" ").filter(w=>!/^[?!.,]$/.test(w)).length>=3).map(x=>({fr:x.fr,id:x.id}));
+  L.dialog.forEach(d=>{if(nm(d[1]).split(" ").length>=3&&!s.some(x=>x.fr==d[1]))s.push({fr:d[1],id:d[2]})});return s}
+function tokens(fr){const out=[];nm(fr).split(" ").forEach(w=>{if(/^[?!:;]$/.test(w)&&out.length)out[out.length-1]+=" "+w;else out.push(w)});return out}
+function build(li){BD={li,list:shuffle(sentencesOf(li)).slice(0,8),i:0,ok:0};buildShow()}
+function buildShow(){const it=BD.list[BD.i];if(!it)return finish(BD.li,"build",Math.round(100*BD.ok/BD.list.length));
+  BD.tok=tokens(it.fr);do{BD.pool=shuffle(BD.tok.map((w,k)=>k))}while(BD.tok.length>1&&BD.pool.every((v,k)=>v==k));BD.ans=[];BD.tries=0;BD.solved=false;buildDraw()}
+function buildDraw(fb){const it=BD.list[BD.i];
+  $("#app").innerHTML=header(BD.li,"🧩 Susun kalimat",BD.i,BD.list.length)+`<div class="card center">
+   <div class="mut">Susun kalimat ini dalam bahasa Prancis:</div><div class="huge" style="font-size:24px">${esc(cleanId(it.id))}</div>
+   <div class="chips ans">${BD.ans.map((k,j)=>`<button ${BD.solved?"disabled":""} onclick="BD.pool.push(BD.ans.splice(${j},1)[0]);buildDraw()">${esc(BD.tok[k])}</button>`).join("")}</div>
+   <div class="chips" style="margin-top:10px">${BD.pool.map((k,j)=>`<button onclick="BD.ans.push(BD.pool.splice(${j},1)[0]);buildDraw()">${esc(BD.tok[k])}</button>`).join("")}</div>
+   <div id="fb">${fb||""}</div>
+   ${BD.solved?"":`<div class="row"><button onclick="say(BD.list[BD.i].fr)">💡 Dengar</button><button class="pri" ${BD.pool.length?"disabled":""} onclick="buildCheck()">Periksa ✓</button></div>`}</div>`}
+function buildCheck(){if(BD.solved)return;const it=BD.list[BD.i];const got=BD.ans.map(k=>BD.tok[k]).join(" ");
+  if(norm(got)==norm(it.fr)){BD.solved=true;if(BD.tries==0){BD.ok++;addXP(10)}else addXP(4);say(it.fr);
+    buildDraw(`<div style="margin:10px 0"><b>✅ Benar!</b> <span class="fr">${esc(nm(it.fr))}</span></div><div class="row"><button class="pri" onclick="BD.i++;buildShow()">Lanjut ▶</button></div>`)}
+  else{BD.tries++;buildDraw(`<div style="margin:10px 0;color:var(--ko)"><b>❌ Belum tepat, coba lagi!</b>${BD.tries>=2?`<br>Jawaban: <span class="fr">${esc(nm(it.fr))}</span>`:""}</div>`)}}
+
+/* ---------- 6. Dictée ---------- */
+let DC;
+function dictee(li){DC={li,list:shuffle(pool(li).filter(x=>!x.fr.includes("{nom}"))).slice(0,8),i:0,ok:0};dicteeShow()}
+function dicteeShow(){const it=DC.list[DC.i];if(!it)return finish(DC.li,"dictee",Math.round(100*DC.ok/DC.list.length));
+  $("#app").innerHTML=header(DC.li,"✍️ Dikte",DC.i,DC.list.length)+`<div class="card center">
+   <div class="mut">Dengarkan, lalu tulis dalam bahasa Prancis</div>
+   <div class="row"><button class="pri" style="font-size:30px;padding:18px 28px" onclick="say(DC.list[DC.i].fr)">🔊</button><button style="font-size:24px" onclick="say(DC.list[DC.i].fr,1)">🐢</button></div>
+   <div class="mut" style="margin-top:8px">Petunjuk: ${esc(cleanId(it.id))}</div>
+   <input class="txt" id="dt" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tulis di sini…" onkeydown="if(event.key=='Enter')dicteeCheck()">
+   <div class="row" style="font-size:14px">${["é","è","ê","à","ç","ù","ô","î","œ","'"].map(c=>`<button class="sm" onclick="const i=$('#dt');i.value+='${c=="'"?"\\'":c}';i.focus()">${c}</button>`).join("")}</div>
+   <div id="fb"><div class="row"><button class="pri" onclick="dicteeCheck()">Periksa ✓</button></div></div></div>`;
+  setTimeout(()=>{say(it.fr);$("#dt").focus()},300)}
+function dicteeCheck(){const it=DC.list[DC.i],v=$("#dt").value;if(!v.trim())return;const target=first(it.fr);
+  const a=norm(target),b=norm(v),sim=1-lev(a,b)/Math.max(a.length,1);
+  const exact=v.trim().toLowerCase().replace(/[.!?\s]+$/,"").replace(/\s+/g," ")==target.toLowerCase().replace(/[.!?\s]+$/,"").replace(/\s+/g," ");
+  let msg;if(a==b){DC.ok++;addXP(10);msg=exact?"✅ Sempurna!":"✅ Benar! (perhatikan aksen/tanda baca)"}else if(sim>=.8){DC.ok+=.5;addXP(5);msg="🟡 Hampir benar!"}else msg="❌ Belum tepat";
+  $("#dt").disabled=true;
+  $("#fb").innerHTML=`<div style="margin-top:12px"><b>${msg}</b><br>Jawaban: <span class="fr">${esc(target)}</span> <span class="pr">${esc(it.p.split(" / ")[0])}</span></div><div class="row"><button class="pri" onclick="DC.i++;dicteeShow()">Lanjut ▶</button></div>`;say(it.fr)}
+
+/* ---------- 7. Memory ---------- */
+let MM;
+function memory(li){const its=shuffle(pool(li)).filter((x,i,a)=>a.findIndex(y=>cleanId(y.id)==cleanId(x.id))==i).slice(0,6);
+  MM={li,cards:shuffle(its.flatMap((x,k)=>[{k,txt:nm(first(x.fr)),fr:x.fr,isFr:1},{k,txt:cleanId(x.id),fr:x.fr}])),open:[],done:new Set(),moves:0,lock:false};memDraw()}
+function memDraw(){$("#app").innerHTML=`<button class="ghost sm" onclick="go('lesson',${MM.li},'exos')">✕ Keluar</button><div class="mut center">🧠 Memory — langkah: ${MM.moves}</div>
+  <div class="card"><div class="mem">${MM.cards.map((c,i)=>{const o=MM.open.includes(i),d=MM.done.has(c.k);return `<button class="${d?"done":o?"open":""}" onclick="memTap(${i})">${o||d?(c.isFr?"🇫🇷 ":"🇮🇩 ")+esc(c.txt):"?"}</button>`}).join("")}</div></div>`}
+function memTap(i){const c=MM.cards[i];if(MM.lock||MM.open.includes(i)||MM.done.has(c.k))return;MM.open.push(i);if(c.isFr)say(c.fr);memDraw();
+  if(MM.open.length==2){MM.moves++;const[a,b]=MM.open.map(j=>MM.cards[j]);
+    if(a.k==b.k){MM.done.add(a.k);MM.open=[];addXP(5);if(!a.isFr)say(a.fr);else say(b.fr);memDraw();
+      if(MM.done.size==6)setTimeout(()=>finish(MM.li,"memory",Math.max(0,Math.min(100,Math.round(100-(MM.moves-6)*6))),`<div class="mut">${MM.moves} langkah</div>`),700)}
+    else{MM.lock=true;setTimeout(()=>{MM.open=[];MM.lock=false;memDraw()},1100)}}}
+
+/* ---------- 8. Tantangan kilat ---------- */
+let SPD={h:null};
+function speed(li){clearInterval(SPD.h);SPD={li,t:60,ok:0,ko:0,h:null};SPD.h=setInterval(()=>{SPD.t--;const e=$("#tm");if(e)e.textContent=SPD.t+"s";if(SPD.t<=0){clearInterval(SPD.h);finish(li,"speed",SPD.ok,`<div class="mut">${SPD.ok} benar · ${SPD.ko} salah dalam 60 detik</div>`)}},1000);speedQ()}
+function speedQ(){if(SPD.t<=0)return;const li=SPD.li,it=shuffle(pool(li))[0],op=options(li,it),dir=Math.random()<.5;SPD.it=it;SPD.op=op;
+  $("#app").innerHTML=`<button class="ghost sm" onclick="go('lesson',${li},'exos')">✕ Keluar</button><div class="card center"><div class="timer" id="tm">${SPD.t}s</div><div class="mut">✓ ${SPD.ok} · ✗ ${SPD.ko}</div>
+   <div class="huge" style="font-size:28px">${esc(dir?nm(it.fr):cleanId(it.id))}</div>
+   <div class="choices">${op.map((o,k)=>`<button id="o${k}" onclick="speedAns(${k})">${esc(dir?cleanId(o.id):nm(o.fr))}</button>`).join("")}</div></div>`}
+function speedAns(k){if(SPD.t<=0)return;const good=SPD.op[k]===SPD.it;$("#o"+k).classList.add(good?"good":"bad");if(good){SPD.ok++;addXP(3)}else SPD.ko++;setTimeout(speedQ,good?250:700)}
+
+/* ---------- 9. Mission : dialogue ---------- */
+let MS;
+function mission(li){MS={li,i:0,scores:[],best:0,shown:[]};missionStep()}
+function missionStep(){const L=LESSONS[MS.li],d=L.dialog[MS.i];
+  if(!d){const avg=Math.round(MS.scores.reduce((a,b)=>a+b,0)/Math.max(MS.scores.length,1));return finish(MS.li,"mission",avg)}
+  const hist=MS.shown.map(x=>`<div class="bubble ${x[0]}"><b>${x[0]=="a"?"🧑‍🦰":"🙋‍♀️"}</b> ${esc(nm(x[1]))}<div class="mut">${esc(nm(x[2]))}</div></div>`).join("");
+  let h=`<button class="ghost sm" onclick="go('lesson',${MS.li},'exos')">✕ Keluar</button><div class="mut center">🎬 Misi — ${L.fr}</div><div class="card">${hist}`;
+  if(d[0]=="a"){h+=`<div class="bubble a"><b>🧑‍🦰</b> ${esc(nm(d[1]))}<div class="mut">${esc(nm(d[2]))}</div></div><div class="row"><button onclick="say(LESSONS[MS.li].dialog[MS.i][1])">🔊</button><button class="pri" onclick="MS.shown.push(LESSONS[MS.li].dialog[MS.i]);MS.i++;missionStep()">Lanjut ▶</button></div></div>`;$("#app").innerHTML=h;say(d[1])}
+  else{MS.best=0;h+=`<div class="center" style="margin-top:12px"><div class="mut">Giliranmu! Jawab dengan suaramu 🙋‍♀️</div><div class="huge" style="font-size:24px">${esc(nm(d[1]))}</div><div class="id">${esc(nm(d[2]))}</div>
+   <div class="row"><button class="sm" onclick="say(LESSONS[MS.li].dialog[MS.i][1])">💡 Dengar contoh</button></div>
+   ${SR?`<button class="mic" onclick="missionGo(this)">🎤</button>`:""}<div id="res"></div>
+   <div class="row"><button class="pri" onclick="MS.scores.push(MS.best||(SR?0:70));MS.shown.push(LESSONS[MS.li].dialog[MS.i]);MS.i++;missionStep()">Lanjut ▶</button></div></div></div>`;$("#app").innerHTML=h}
+  window.scrollTo(0,document.body.scrollHeight)}
+function missionGo(btn){const d=LESSONS[MS.li].dialog[MS.i];$("#res").innerHTML=`<div class="mut">🎙️ Aku mendengarkan…</div>`;listen(d[1],res=>{if(!res){$("#res").innerHTML="";return}$("#res").innerHTML=resultHTML(res);if(res.score>MS.best){addXP(5*Math.max(0,starsOf(res.score)-starsOf(MS.best)));MS.best=res.score}},btn)}
+
+
+/* ============================== DIAGNOSTIC MICRO ============================== */
+function micProblem(){toast("🎤 Mikrofon tidak bisa dipakai oleh Chrome. Buka ❓ → 🔧 Tes mikrofon",5000);setTimeout(micTest,600)}
+async function micTest(){const m=document.createElement("div");m.className="modal";document.body.appendChild(m);let stream=null,ctx=null,raf=0;
+  const close=()=>{cancelAnimationFrame(raf);stream&&stream.getTracks().forEach(t=>t.stop());ctx&&ctx.close();m.remove()};
+  const show=body=>{m.innerHTML=`<div class="card"><h2>🔧 Tes mikrofon</h2>${body}<div class="row"><button onclick="micTest();this.closest('.modal').remove()">↻ Tes lagi</button><button class="pri" id="mtClose">OK</button></div></div>`;m.querySelector("#mtClose").onclick=close};
+  const FIX=`<div class="prof"><b>Pour Ben / la prof — que vérifier :</b><br>
+   1. <b>Le micro choisi par Chrome</b> : ouvrir <code>chrome://settings/content/microphone</code> et choisir le casque dans la liste déroulante en haut (Chrome n'utilise pas forcément le micro par défaut du système).<br>
+   2. <b>Une autre appli occupe le micro</b> (Zoom, Teams, Discord, WhatsApp, OBS…) : la fermer complètement.<br>
+   3. <b>Autorisation du système</b> — Windows : Paramètres → Confidentialité → Microphone → autoriser les applications de bureau. Mac : Réglages Système → Confidentialité → Micro → cocher Chrome (puis relancer Chrome).<br>
+   4. <b>Casque Bluetooth</b> : il doit être en mode « casque / mains libres » ; sinon essayer le micro intégré de l'ordinateur pour isoler le problème.<br>
+   5. Débrancher/rebrancher le casque, puis <b>fermer et relancer Chrome</b> (toutes les fenêtres).<br>
+   6. Ouvrir l'app depuis un vrai site (https) plutôt qu'un fichier local si possible.</div>`;
+  show(`<div class="mut">Mengecek mikrofon…</div>`);
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return show(`<div class="warn">Browser ini tidak memberi akses mikrofon (halaman bukan https / browser lama).</div>${FIX}`);
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+  catch(e){const why={NotAllowedError:"Akses mikrofon ditolak (izin browser / sistem). — Accès refusé : autorisation Chrome ou système.",NotFoundError:"Tidak ada mikrofon yang ditemukan. — Aucun micro détecté.",NotReadableError:"Mikrofon sedang dipakai aplikasi lain atau diblokir sistem. — Micro occupé par une autre appli ou bloqué par le système.",OverconstrainedError:"Mikrofon yang dipilih tidak tersedia. — Le micro sélectionné n'existe plus."}[e.name]||e.name+" : "+e.message;
+    return show(`<div class="warn">❌ ${why}</div>${FIX}`)}
+  const tr=stream.getAudioTracks()[0];let devs=[];try{devs=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind=="audioinput")}catch(e){}
+  show(`<div>✅ Mikrofon aktif: <b>${esc(tr.label||"(tanpa nama)")}</b></div><div class="mut">${devs.length} mikrofon terdeteksi: ${devs.map(d=>esc(d.label||"?")).join(" · ")}</div>
+   <div style="margin-top:12px">Bicaralah — batangnya harus bergerak:</div><div class="bar" style="height:22px"><i id="lvl" style="width:0%"></i></div><div class="mut" id="lvlTxt"></div>
+   <div class="mut" style="margin-top:8px">Kalau ini bukan headset-mu, pilih headset di <code>chrome://settings/content/microphone</code>.</div>${FIX}`);
+  ctx=new (window.AudioContext||window.webkitAudioContext)();const an=ctx.createAnalyser();an.fftSize=512;ctx.createMediaStreamSource(stream).connect(an);const buf=new Uint8Array(an.fftSize);let peak=0;
+  const loop=()=>{an.getByteTimeDomainData(buf);let mx=0;for(const v of buf)mx=Math.max(mx,Math.abs(v-128));const pc=Math.min(100,Math.round(mx/128*250));peak=Math.max(peak,pc);
+    const l=m.querySelector("#lvl"),t=m.querySelector("#lvlTxt");if(l){l.style.width=pc+"%";t.textContent=peak>15?"👍 Suara terdengar! Mikrofon berfungsi.":"… belum ada suara"}raf=requestAnimationFrame(loop)};loop()}
+
+/* ============================== AIDE / NOM ============================== */
+function showHelp(){const m=document.createElement("div");m.className="modal";m.onclick=e=>{if(e.target==m)m.remove()};
+  m.innerHTML=`<div class="card"><h2>❓ Cara membaca petunjuk</h2><table class="pron">
+  <tr><td><b class="pr">ü</b></td><td>bilang « i » sambil bibir bulat (tu = tü)</td></tr>
+  <tr><td><b class="pr">u</b></td><td>u biasa (vous = vu)</td></tr>
+  <tr><td><b class="pr">ö</b></td><td>bilang « e » sambil bibir bulat (deux = dö)</td></tr>
+  <tr><td><b class="pr">ë</b></td><td>e seperti di « senang » (le = lë)</td></tr>
+  <tr><td><b class="pr">é</b></td><td>e seperti di « sate » (café)</td></tr>
+  <tr><td><b class="pr">è</b></td><td>e lebih terbuka, seperti di « pesta » (mère)</td></tr>
+  <tr><td><b class="pr">on~ an~ in~</b></td><td>bunyi lewat hidung, jangan ucapkan n-nya (bon, enfant, pain)</td></tr>
+  <tr><td><b class="pr">R</b></td><td>r dari tenggorokan, seperti berkumur pelan</td></tr>
+  <tr><td><b class="pr">zh</b></td><td>j lembut, seperti « sy » tapi bersuara (je, rouge)</td></tr>
+  <tr><td><b class="pr">sy</b></td><td>ch Prancis (chat = sya)</td></tr>
+  <tr><td><b class="pr">ny</b></td><td>gn Prancis (montagne)</td></tr></table>
+  <h3 style="margin-top:14px">🎤 Mikrofon</h3><div class="mut">Gunakan <b>Google Chrome</b>. Saat pertama kali, izinkan mikrofon. Tekan 🎤, tunggu sampai berdenyut, lalu bicara dengan jelas. Kata <span class="w-ok">hijau</span> = dimengerti, kata <span class="w-ko">merah</span> = belum dimengerti.</div>
+  <div class="row"><button onclick="this.closest('.modal').remove();micTest()">🔧 Tes mikrofon</button></div>
+  <div class="row"><button class="pri" onclick="this.closest('.modal').remove()">OK 👍</button></div></div>`;document.body.appendChild(m)}
+function askName(force){if(S.name&&!force)return;const m=document.createElement("div");m.className="modal";
+  m.innerHTML=`<div class="card center"><div style="font-size:50px">🇮🇩 ✈️ 🇫🇷</div><h2>Halo! Siapa namamu?</h2><div class="mut">Namamu dipakai di latihan (« Je m'appelle … »)</div>
+  <input class="txt" id="nmIn" value="${esc(S.name)}" placeholder="Nama…"><div class="row"><button class="pri" onclick="const v=$('#nmIn').value.trim();if(v){S.name=v;save();this.closest('.modal').remove();go('home')}">Mulai! 🚀</button></div></div>`;
+  document.body.appendChild(m);setTimeout(()=>$("#nmIn").focus(),50)}
+function resetAll(){if(confirm("Hapus semua kemajuan (XP, hasil)?")){const n=S.name;localStorage.removeItem(KEY);S={name:n,xp:0,mastered:{},done:{},best:{},courseDone:{},prof:false};save();go("home")}}
+
+renderTop();go("home");askName();
+</script>
+</body>
+</html>
